@@ -1,98 +1,117 @@
-"use strict ;"
-
-class Node {
-  constructor(data) {
-    this.data = data;
-    this.next = null;
-  }
-}
+ "use strict ";
+const Node = require('./Node');
 
 class LinkedList {
   constructor() {
     this.head = null;
-    this.length = 0; 
+    this.length = 0;
   }
 
-  add(data) {
-    const node = new Node(data);
+  // Append node at end
+  append(value) {
+    const newNode = new Node(value);
     if (!this.head) {
-      this.head = node;
-      this.length++;
-      return node;
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+    this.length++;
+    return this;
+  }
+
+  // Insert at specific index
+  insertAt(value, index) {
+    if (index < 0 || index > this.length) throw new RangeError('Index out of bounds');
+    const newNode = new Node(value);
+    if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+    } else {
+      let current = this.head;
+      let prev = null;
+      let i = 0;
+      while (i < index) {
+        prev = current;
+        current = current.next;
+        i++;
+      }
+      prev.next = newNode;
+      newNode.next = current;
+    }
+    this.length++;
+  }
+
+  // Remove node by value
+  remove(value) {
+    if (!this.head) return false;
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.length--;
+      return true;
     }
     let current = this.head;
-    while (current.next) current = current.next;
-    current.next = node;
-    this.length++;
-    return node;
+    let prev = null;
+    while (current && current.value !== value) {
+      prev = current;
+      current = current.next;
+    }
+    if (!current) return false;
+    prev.next = current.next;
+    this.length--;
+    return true;
   }
 
-  includes(data) {
+  // Check if value exists
+  includes(value) {
     let current = this.head;
     while (current) {
-      if (current.data === data) return true;
+      if (current.value === value) return true;
       current = current.next;
     }
     return false;
   }
 
-  remove(data) {
-    if (!this.head) return false; 
-    if (this.head.data === data) {
-      this.head = this.head.next;
-      this.length--;
-      return true;
-    }
-    let prev = this.head;
-    let current = this.head.next;
+  // Reverse the linked list
+  reverse() {
+    if (!this.head) return null;
+    let prev = null;
+    let current = this.head;
+    let next = null;
     while (current) {
-      if (current.data === data) {
-        prev.next = current.next;
-        this.length--;
-        return true;
-      }
+      next = current.next;
+      current.next = prev;
       prev = current;
-      current = current.next;
+      current = next;
     }
-    return false; 
+    this.head = prev;
   }
 
-  insertAt(data, index) {
-    if (typeof index !== 'number' || index < 0 || index > this.length) {
-      throw new RangeError(`Index out of bounds: ${index}`);
-    }
-    const node = new Node(data);
-    if (index === 0) {
-      node.next = this.head;
-      this.head = node;
-      this.length++;
-      return node;
-    }
+   printList()
+ {
+     let curr=this.head;
 
-    let prev = this.head;
-    for (let i = 0; i < index - 1; i++) prev = prev.next;
-    node.next = prev.next;
-    prev.next = node;
-    this.length++;
-    return node;
-  }
+     let values=[];//empty array
+     while (curr!==null) {
+         values.push(curr.value);
+         curr=curr.next;
+     }
+     console.log("Head ---->",values.join(" ----> "),"---->Null");
+    return ;
+ }
 
-  toString() {
-    let parts = ['Head'];
+  toArray() {
+    const arr = [];
     let current = this.head;
     while (current) {
-      parts.push(String(current.data));
+      arr.push(current.value);
       current = current.next;
     }
-    parts.push('null');
-    return parts.join(' -> ');
-  }
-
-  printList() {
-    const s = this.toString();
-    console.log(s);
-    return s; 
+    return arr;
   }
 }
 
-module.exports = {LinkedList };
+module.exports = LinkedList ;

@@ -30,3 +30,28 @@ try {
 } catch (e) {
   console.error('Error inserting at invalid index:', e.message);
 }
+
+// MergeSorted/app.js
+
+function demo(title, arr1, arr2) {
+  const list1 = LinkedList.fromArray(arr1);
+  const list2 = LinkedList.fromArray(arr2);
+  const merged = LinkedList.mergeSortedLists(list1, list2);
+
+  console.log("~~~ " + title + " ~~~");
+  console.log("List 1:", list1.toArray());
+  console.log("List 2:", list2.toArray());
+  console.log(
+    "Merged:",
+    merged ? merged.toArray() : "null"
+  );
+  console.log();
+}
+
+demo("Example 1", [1, 3, 5], [2, 4, 6]);                  // 1 2 3 4 5 6
+demo("Example 2", [5, 10, 15], [2, 3, 20]);                // 2 3 5 10 15 20
+demo("Example 3", [10, 20, 30], [5, 15, 25, 35]);          // 5 10 15 20 25 30 35
+
+demo("Edge: one empty", [], [1, 2, 3]);                    // 1 2 3
+demo("Edge: both empty", [], []);                          // null
+

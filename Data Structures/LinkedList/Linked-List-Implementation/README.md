@@ -7,8 +7,8 @@ The implementation also considers edge cases (such as empty lists and invalid in
 ### ********************************************
 
 ### Whiteboard-Image :
-![Whiteboard](./whiteboard.png)
+![Whiteboard](./docs/single-whiteboard.png)
 
 ### ********************************************
 ## Consol-output :
-![Output](./consol-output.png)
+![Output](./docs/single-consol-output.png)

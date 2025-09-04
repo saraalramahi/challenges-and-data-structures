@@ -61,12 +61,12 @@ describe('LinkedList', () => {
     expect(() => list.insertAt(99, 5)).toThrow(RangeError);
   });
 
-  test('printList on empty list prints "Head -> null"', () => {
+  test('printList on empty list prints "Head ----> null"', () => {
     const list = new LinkedList();
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const out = list.printList();
-    expect(out).toBe('Head -> null');
-    expect(spy).toHaveBeenCalledWith('Head -> null');
+    expect(out).toBe('Head ----> null');
+    expect(spy).toHaveBeenCalledWith('Head ----> null');
     spy.mockRestore();
   });
 });

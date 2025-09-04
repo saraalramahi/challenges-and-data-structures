@@ -35,8 +35,8 @@ describe('Reverse Linked List', () => {
     const list = new LinkedList();
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const out = list.printList();
-    expect(out).toBe('Head -> null');
-    expect(spy).toHaveBeenCalledWith('Head -> null');
+    expect(out).toBe('Head ----> null');
+    expect(spy).toHaveBeenCalledWith('Head ----> null');
     spy.mockRestore();
   });
 
@@ -45,8 +45,8 @@ describe('Reverse Linked List', () => {
     list.append(1).append(2).append(3);
     const spy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const out = list.printList();
-    expect(out).toBe('Head -> 1 -> 2 -> 3 -> null');
-    expect(spy).toHaveBeenCalledWith('Head -> 1 -> 2 -> 3 -> null');
+    expect(out).toBe('Head ----> 1 ----> 2 ----> 3 ----> null');
+    expect(spy).toHaveBeenCalledWith('Head ----> 1 ----> 2 ----> 3 ----> null');
     spy.mockRestore();
   });
 });
